@@ -45,4 +45,19 @@ See <http://purl.org/nemo/doc/gufo> for the foundational ontology employed.
 
 ## OntoUML Models
 
-<img src="./disposition.png" alt="Core Concepts" />
+<img src="./disposition.png" alt="Core Concepts Sub-Ontology" />
+
+<img src="./disposition_interaction1.png" alt="Interactive Disposition Sub-Ontology" />
+
+<img src="./disposition_interaction3.png" alt="Interactive Disposition  Sub-Ontology" />
+
+<img src="./disposition_emergence.png" alt="Disposition Emergence Sub-Ontology" />
+
+<img src="./disposition_type.png" alt="Disposition Type Sub-Ontology" />
+
+
+
+
+
+
+
