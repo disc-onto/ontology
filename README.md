@@ -23,7 +23,7 @@ R. F. Calhau, J. P. A. Almeida, G. Guizzardi, "Disc-O: Disposition Interaction C
 This work is distributed under Creative Commons Attribution License CC BY 4.0 <https://creativecommons.org/licenses/by/4.0/legalcode>.
 
 
-For the source repository, see: <https://github.com/disc-onto/ontology
+For the source repository, see: <https://github.com/disc-onto/ontology>
 
 
 A reference version in OntoUML ([disposition_ontology.vpp](./disc_ontology.vpp)) and a gUFO-based operational version in OWL [disposition_ontology.ttl](./disposition_ontology.ttl) are included in this repository. 
@@ -41,3 +41,8 @@ Authors:
 * Giancarlo Guizzardi.
 
 See <http://purl.org/nemo/doc/gufo> for the foundational ontology employed.
+
+
+## OntoUML Models
+
+<img src="./disposition.png" alt="Core Concepts" />
