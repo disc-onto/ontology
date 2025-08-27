@@ -59,7 +59,7 @@ Dispositions can be lone or reciprocal. Lone dispositions manifest themselves al
 #### Types of Interactive Dispositions
 Interactive dispositions can be: Additional, Subtractive, Manifestation Disposition Partner, Enabling, Disabling, Changing Disposition.
 
-<img src="./img/disposition_interaction3.png" alt="Interactive Disposition  Sub-Ontology" />
+<img src="./img/disposition_interaction3.png" alt="Interactive Disposition  Sub-Ontology" width=70% />
 
 ### Emergent Disposition Sub-Ontology
 Emergent dispositions characterize a whole (functional complex) and emerge from particular dispositions (which characterize parts). Resultant dispositions also characterize a whole but are derived directly from particular dispositions. Dispositions can also be simple or complex. Complex dispositions are those formed from other dispositions.
