@@ -1,0 +1,989 @@
+@prefix : <http://purl.org/disco#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix gufo: <http://purl.org/nemo/gufo#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@base <http://purl.org/disc> .
+
+<http://purl.org/disc> rdf:type owl:Ontology ;
+                        owl:versionIRI <http://purl.org/disc/1.0.0> ;
+                        owl:imports gufo: ,
+                                    <http://purl.org/nemo/gufo#/1.0.0> ;
+                        <http://purl.org/dc/elements/1.1/creator> """<https://orcid.org/0009-0006-6051-2165>,
+<https://orcid.org/0000-0002-9819-3781>,
+<https://orcid.org/0000-0002-3452-553X>"""@en ;
+                        <http://purl.org/dc/elements/1.1/title> "Disc-O: Disposition Interaction Core Ontology"@en ;
+                        <http://purl.org/dc/terms/created> "2025-08-27"@en ;
+                        <http://purl.org/dc/terms/issued> "2025-08-27"@en ;
+                        <http://purl.org/dc/terms/license> "https://creativecommons.org/licenses/by/4.0/legalcode"@en ;
+                        <http://purl.org/vocab/vann/preferredNamespacePrefix> "disc"@en ;
+                        <http://purl.org/vocab/vann/preferredNamespaceUri> "http://purl.com/disc"@en ;
+                        rdf:type "http://purl.org/vocommons/voaf#Vocabulary"@en ;
+                        rdfs:comment "The design and maintenance of diverse system types are driven by the goal of enabling specific system-wide capabilities while mitigating vulnerabilities. However, achieving and understanding global aspects such as resilience, adaptability, and security is challenging due to their emergent nature. For instance, resilience can manifest through a combination of resistant, flexible, durable, and sometimes even fragile components within a system. To address these challenges, this paper proposes a disposition core ontology for interrelating dispositions within systems (Disc-O) , grounded in system science, emergence explanations, and disposition theories. The ontology aims to enhance the modeling of the emergent dispositions and disposition relationships of systems. By leveraging concepts from Unified Foundational Ontology (UFO) and OntoUML, Disc-O supports a comprehensive understanding of disposition horizontal and vertical relationships. We validate the proposed ontology applying it in distinct scenarios, and, we discuss some implications for the modeling area."@en ;
+                        owl:priorVersion "0.0.9"@en ;
+                        owl:versionInfo "1.0.0"@en .
+
+#################################################################
+#    Annotation properties
+#################################################################
+
+###  http://purl.org/dc/elements/1.1/creator
+<http://purl.org/dc/elements/1.1/creator> rdf:type owl:AnnotationProperty .
+
+
+###  http://purl.org/dc/terms/issued
+<http://purl.org/dc/terms/issued> rdf:type owl:AnnotationProperty .
+
+
+###  http://purl.org/nemo/gufo#isDerivedFrom
+gufo:isDerivedFrom rdf:type owl:AnnotationProperty .
+
+
+###  http://www.w3.org/1999/02/22-rdf-syntax-ns#type
+rdf:type rdf:type owl:AnnotationProperty .
+
+
+#################################################################
+#    Object Properties
+#################################################################
+
+###  file:/Users/rodrigocalhau/Documents/VPProjects/null
+<file:/Users/rodrigocalhau/Documents/VPProjects/null> rdf:type owl:ObjectProperty ;
+                                                      rdfs:domain :ObjectQuality ;
+                                                      rdfs:range :Disposition ;
+                                                      rdfs:label "categoricalBaseOf"@en .
+
+
+###  http://purl.org/disc#changes
+:changes rdf:type owl:ObjectProperty ;
+         rdfs:subPropertyOf :interactsWithDisposition ;
+         rdfs:domain :ChangingDisposition ;
+         rdfs:range :Disposition ;
+         rdfs:label "changes"@en .
+
+
+###  http://purl.org/disc#constitutesEmergentEvent
+:constitutesEmergentEvent rdf:type owl:ObjectProperty ;
+                          rdfs:subPropertyOf gufo:constitutes ;
+                          rdfs:domain :ParticularDispositionManifestation ;
+                          rdfs:range :EmergentDispositionManifestation ;
+                          rdfs:label "constitutesEmergentEvent"@en .
+
+
+###  http://purl.org/disc#disables
+:disables rdf:type owl:ObjectProperty ;
+          rdfs:subPropertyOf :interactsWithDisposition ;
+          rdfs:domain :DisablingDisposition ;
+          rdfs:range :Disposition ;
+          rdfs:label "disables"@en .
+
+
+###  http://purl.org/disc#emergesFrom
+:emergesFrom rdf:type owl:ObjectProperty ;
+             rdfs:domain :EmergentDisposition ;
+             rdfs:range :ParticularDisposition ;
+             rdfs:label "emergesFrom"@en .
+
+
+###  http://purl.org/disc#enables
+:enables rdf:type owl:ObjectProperty ;
+         rdfs:subPropertyOf :interactsWithDisposition ;
+         rdfs:domain :EnablingDisposition ;
+         rdfs:range :Disposition ;
+         rdfs:label "enables"@en .
+
+
+###  http://purl.org/disc#interactsWithDisposition
+:interactsWithDisposition rdf:type owl:ObjectProperty ;
+                          rdfs:domain :InteractiveDisposition ;
+                          rdfs:range :InteractiveDisposition ;
+                          rdfs:label "interactsWithDisposition"@en .
+
+
+###  http://purl.org/disc#isAdditionalTo
+:isAdditionalTo rdf:type owl:ObjectProperty ;
+                rdfs:subPropertyOf :interactsWithDisposition ;
+                rdfs:domain :AdditionalDisposition ;
+                rdfs:range :Disposition ;
+                rdfs:label "isAdditionalTo"@en .
+
+
+###  http://purl.org/disc#isDispositionProperPartOf
+:isDispositionProperPartOf rdf:type owl:ObjectProperty ;
+                           rdfs:subPropertyOf gufo:isAspectProperPartOf ;
+                           rdfs:domain :Disposition ;
+                           rdfs:range :ComplexDisposition ;
+                           rdfs:label "isDispositionProperPartOf"@en .
+
+
+###  http://purl.org/disc#isParticularEventProperPartOf
+:isParticularEventProperPartOf rdf:type owl:ObjectProperty ;
+                               rdfs:subPropertyOf gufo:isEventProperPartOf ;
+                               rdfs:domain gufo:Event ;
+                               rdfs:range :ComplexEvent ;
+                               rdfs:label "isParticularEventProperPartOf"@en .
+
+
+###  http://purl.org/disc#isReciprocalTo
+:isReciprocalTo rdf:type owl:ObjectProperty ;
+                rdfs:subPropertyOf :interactsWithDisposition ;
+                rdfs:domain :ManifestationPartnerDisposition ;
+                rdfs:range :ManifestationPartnerDisposition ;
+                rdfs:label "isReciprocalTo"@en .
+
+
+###  http://purl.org/disc#isSubstractiveTo
+:isSubstractiveTo rdf:type owl:ObjectProperty ;
+                  rdfs:subPropertyOf :interactsWithDisposition ;
+                  rdfs:domain :SubtractiveDisposition ;
+                  rdfs:range :Disposition ;
+                  rdfs:label "isSubtractiveTo"@en .
+
+
+###  http://purl.org/disc#resultsFrom
+:resultsFrom rdf:type owl:ObjectProperty ;
+             rdfs:domain :ResultantDisposition ;
+             rdfs:range :ParticularDisposition ;
+             rdfs:label "resultsFrom"@en .
+
+
+###  http://purl.org/disco#activation
+:activation rdf:type owl:ObjectProperty ;
+            rdfs:domain gufo:SituationType ;
+            rdfs:range :DispositionType ;
+            rdfs:label "activation"@en .
+
+
+###  http://purl.org/disco#bonding
+:bonding rdf:type owl:ObjectProperty ;
+         rdfs:domain :ObjectType ;
+         rdfs:range :ObjectType ;
+         rdfs:label "bonding"@en .
+
+
+###  http://purl.org/disco#bringingAboutOf
+:bringingAboutOf rdf:type owl:ObjectProperty ;
+                 rdfs:domain gufo:EventType ;
+                 rdfs:range gufo:SituationType ;
+                 rdfs:label "bringingAboutOf"@en .
+
+
+###  http://purl.org/disco#characterization
+:characterization rdf:type owl:ObjectProperty ;
+                  rdfs:domain :DispositionType ;
+                  rdfs:range :ObjectType ;
+                  rdfs:label "characterization"@en .
+
+
+###  http://purl.org/disco#characterization_1
+:characterization_1 rdf:type owl:ObjectProperty ;
+                    rdfs:subPropertyOf :characterization ;
+                    rdfs:domain :DispositionTypeByLevel ;
+                    rdfs:range :ObjectTypeByLevel ;
+                    rdfs:label "characterizationByLevel"@en .
+
+
+###  http://purl.org/disco#composition
+:composition rdf:type owl:ObjectProperty ;
+             rdfs:domain :DispositionType ;
+             rdfs:range :DispositionType ;
+             rdfs:label "compositionDispositionType"@en .
+
+
+###  http://purl.org/disco#composition_1
+:composition_1 rdf:type owl:ObjectProperty ;
+               rdfs:domain :ObjectTypeByLevel ;
+               rdfs:range :ObjectTypeByLevel ;
+               rdfs:label "compositionObjectType"@en .
+
+
+###  http://purl.org/disco#emergence
+:emergence rdf:type owl:ObjectProperty ;
+           rdfs:domain :DispositionType ;
+           rdfs:range :DispositionType ;
+           rdfs:label "emergence"@en .
+
+
+###  http://purl.org/disco#emergence_1
+:emergence_1 rdf:type owl:ObjectProperty ;
+             rdfs:subPropertyOf :emergence ;
+             rdfs:domain :DispositionTypeByLevel ;
+             rdfs:range :DispositionTypeByLevel ;
+             rdfs:label "emergenceByLevel"@en .
+
+
+###  http://purl.org/disco#interaction
+:interaction rdf:type owl:ObjectProperty ;
+             rdfs:domain :InteractiveDispositionRole ;
+             rdfs:range :InteractiveDispositionRole ;
+             rdfs:label "interactionInteractiveDispositionRole"@en .
+
+
+###  http://purl.org/disco#interaction_1
+:interaction_1 rdf:type owl:ObjectProperty ;
+               rdfs:domain :InteractiveObjectRole ;
+               rdfs:range :InteractiveObjectRole ;
+               rdfs:label "interactionInteractiveObjective"@en .
+
+
+###  http://purl.org/disco#interactsWith_1
+:interactsWith_1 rdf:type owl:ObjectProperty ;
+                 rdfs:domain :InteractiveObject ;
+                 rdfs:range :InteractiveObject .
+
+
+###  http://purl.org/disco#manifestation
+:manifestation rdf:type owl:ObjectProperty ;
+               rdfs:domain gufo:EventType ;
+               rdfs:range :DispositionType ;
+               rdfs:label "manifestation"@en .
+
+
+###  http://purl.org/disco#participation
+:participation rdf:type owl:ObjectProperty ;
+               rdfs:domain :ObjectType ;
+               rdfs:range gufo:EventType ;
+               rdfs:label "participation"@en .
+
+
+#################################################################
+#    Classes
+#################################################################
+
+###  http://purl.org/disco#AdditionalDisposition
+:AdditionalDisposition rdf:type owl:Class ;
+                       rdfs:subClassOf :InteractiveDisposition .
+
+
+###  http://purl.org/disco#AtomicEvent
+:AtomicEvent rdf:type owl:Class ;
+             rdfs:subClassOf gufo:Event ,
+                             [ rdf:type owl:Restriction ;
+                               owl:onProperty [ owl:inverseOf gufo:manifestedIn
+                                              ] ;
+                               owl:someValuesFrom :SimpleDisposition
+                             ] .
+
+
+###  http://purl.org/disco#ChangingDisposition
+:ChangingDisposition rdf:type owl:Class ;
+                     rdfs:subClassOf :InteractiveDisposition .
+
+
+###  http://purl.org/disco#ComplexDisposition
+:ComplexDisposition rdf:type owl:Class ;
+                    rdfs:subClassOf :Disposition ;
+                    owl:disjointWith :SimpleDisposition .
+
+
+###  http://purl.org/disco#ComplexEvent
+:ComplexEvent rdf:type owl:Class ;
+              rdfs:subClassOf gufo:Event .
+
+
+###  http://purl.org/disco#DisablingDisposition
+:DisablingDisposition rdf:type owl:Class ;
+                      rdfs:subClassOf :InteractiveDisposition .
+
+
+###  http://purl.org/disco#Disposition
+:Disposition rdf:type owl:Class ;
+             rdfs:subClassOf gufo:IntrinsicMode ,
+                             [ rdf:type owl:Restriction ;
+                               owl:onProperty gufo:inheresIn ;
+                               owl:someValuesFrom gufo:Object
+                             ] .
+
+
+###  http://purl.org/disco#DispositionManifestation
+:DispositionManifestation rdf:type owl:Class ;
+                          rdfs:subClassOf gufo:Event ,
+                                          [ rdf:type owl:Restriction ;
+                                            owl:onProperty gufo:participatedIn ;
+                                            owl:someValuesFrom :DispositionOutput
+                                          ] ,
+                                          [ rdf:type owl:Restriction ;
+                                            owl:onProperty [ owl:inverseOf gufo:manifestedIn
+                                                           ] ;
+                                            owl:someValuesFrom :Disposition
+                                          ] ,
+                                          [ rdf:type owl:Restriction ;
+                                            owl:onProperty [ owl:inverseOf gufo:participatedIn
+                                                           ] ;
+                                            owl:someValuesFrom gufo:Object
+                                          ] ,
+                                          [ rdf:type owl:Restriction ;
+                                            owl:onProperty [ owl:inverseOf gufo:contributedToTrigger
+                                                           ] ;
+                                            owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                            owl:onClass :ManifestationContext
+                                          ] ,
+                                          [ rdf:type owl:Restriction ;
+                                            owl:onProperty gufo:broughtAbout ;
+                                            owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                            owl:onClass :DispositionOutcome
+                                          ] .
+
+
+###  http://purl.org/disco#DispositionOutcome
+:DispositionOutcome rdf:type owl:Class ;
+                    rdfs:subClassOf gufo:Situation ,
+                                    [ rdf:type owl:Restriction ;
+                                      owl:onProperty [ owl:inverseOf gufo:broughtAbout
+                                                     ] ;
+                                      owl:someValuesFrom :DispositionManifestation
+                                    ] .
+
+
+###  http://purl.org/disco#DispositionOutput
+:DispositionOutput rdf:type owl:Class ;
+                   rdfs:subClassOf gufo:Object .
+
+
+###  http://purl.org/disco#DispositionType
+:DispositionType rdf:type owl:Class ;
+                 rdfs:subClassOf gufo:EndurantType .
+
+
+###  http://purl.org/disco#DispositionTypeByFunction
+:DispositionTypeByFunction rdf:type owl:Class ;
+                           rdfs:subClassOf :DispositionType .
+
+
+###  http://purl.org/disco#DispositionTypeByLevel
+:DispositionTypeByLevel rdf:type owl:Class ;
+                        rdfs:subClassOf :DispositionType .
+
+
+###  http://purl.org/disco#EmergentDisposition
+:EmergentDisposition rdf:type owl:Class ;
+                     rdfs:subClassOf :Disposition ,
+                                     [ rdf:type owl:Restriction ;
+                                       owl:onProperty gufo:inheresIn ;
+                                       owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                       owl:onClass gufo:FunctionalComplex
+                                     ] ;
+                     owl:disjointWith :ResultantDisposition .
+
+
+###  http://purl.org/disco#EmergentDispositionManifestation
+:EmergentDispositionManifestation rdf:type owl:Class ;
+                                  rdfs:subClassOf gufo:Event ,
+                                                  [ rdf:type owl:Restriction ;
+                                                    owl:onProperty [ owl:inverseOf gufo:participatedIn
+                                                                   ] ;
+                                                    owl:someValuesFrom gufo:FunctionalComplex
+                                                  ] ,
+                                                  [ rdf:type owl:Restriction ;
+                                                    owl:onProperty [ owl:inverseOf gufo:manifestedIn
+                                                                   ] ;
+                                                    owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                                    owl:onClass :EmergentDisposition
+                                                  ] .
+
+
+###  http://purl.org/disco#EnablingDisposition
+:EnablingDisposition rdf:type owl:Class ;
+                     rdfs:subClassOf :InteractiveDisposition .
+
+
+###  http://purl.org/disco#InteractiveDisposition
+:InteractiveDisposition rdf:type owl:Class ;
+                        rdfs:subClassOf :Disposition ,
+                                        [ rdf:type owl:Restriction ;
+                                          owl:onProperty [ owl:inverseOf gufo:inheresIn
+                                                         ] ;
+                                          owl:someValuesFrom :InteractiveObject
+                                        ] .
+
+
+###  http://purl.org/disco#InteractiveDispositionManifestation
+:InteractiveDispositionManifestation rdf:type owl:Class ;
+                                     rdfs:subClassOf :DispositionManifestation ,
+                                                     [ rdf:type owl:Restriction ;
+                                                       owl:onProperty [ owl:inverseOf gufo:manifestedIn
+                                                                      ] ;
+                                                       owl:someValuesFrom :InteractiveDisposition
+                                                     ] ,
+                                                     [ rdf:type owl:Restriction ;
+                                                       owl:onProperty [ owl:inverseOf gufo:contributedToTrigger
+                                                                      ] ;
+                                                       owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                                       owl:onClass :InteractiveSituation
+                                                     ] .
+
+
+###  http://purl.org/disco#InteractiveDispositionRole
+:InteractiveDispositionRole rdf:type owl:Class ;
+                            rdfs:subClassOf :DispositionType ,
+                                            gufo:RoleMixin .
+
+
+###  http://purl.org/disco#InteractiveObject
+:InteractiveObject rdf:type owl:Class ;
+                   rdfs:subClassOf gufo:Object ,
+                                   [ rdf:type owl:Restriction ;
+                                     owl:onProperty [ owl:inverseOf gufo:mediates
+                                                    ] ;
+                                     owl:someValuesFrom :InteractiveRelator
+                                   ] ,
+                                   [ rdf:type owl:Restriction ;
+                                     owl:onProperty gufo:inheresIn ;
+                                     owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                     owl:onClass :InteractiveDisposition
+                                   ] .
+
+
+###  http://purl.org/disco#InteractiveObjectRole
+:InteractiveObjectRole rdf:type owl:Class ;
+                       rdfs:subClassOf :ObjectType ,
+                                       gufo:RoleMixin .
+
+
+###  http://purl.org/disco#InteractiveRelator
+:InteractiveRelator rdf:type owl:Class ;
+                    rdfs:subClassOf gufo:Relator ,
+                                    [ rdf:type owl:Restriction ;
+                                      owl:onProperty gufo:mediates ;
+                                      owl:minQualifiedCardinality "2"^^xsd:nonNegativeInteger ;
+                                      owl:onClass :InteractiveObject
+                                    ] .
+
+
+###  http://purl.org/disco#InteractiveSituation
+:InteractiveSituation rdf:type owl:Class ;
+                      rdfs:subClassOf gufo:Situation .
+
+
+###  http://purl.org/disco#JointManifestation
+:JointManifestation rdf:type owl:Class ;
+                    rdfs:subClassOf :InteractiveDispositionManifestation ,
+                                    [ rdf:type owl:Restriction ;
+                                      owl:onProperty [ owl:inverseOf gufo:manifestedIn
+                                                     ] ;
+                                      owl:someValuesFrom :ManifestationPartnerDisposition
+                                    ] .
+
+
+###  http://purl.org/disco#LoneDisposition
+:LoneDisposition rdf:type owl:Class ;
+                 rdfs:subClassOf :Disposition ;
+                 owl:disjointWith :ReciprocalDisposition .
+
+
+###  http://purl.org/disco#LoneManifestation
+:LoneManifestation rdf:type owl:Class ;
+                   rdfs:subClassOf :DispositionManifestation ,
+                                   [ rdf:type owl:Restriction ;
+                                     owl:onProperty [ owl:inverseOf gufo:manifestedIn
+                                                    ] ;
+                                     owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                     owl:onClass :LoneDisposition
+                                   ] .
+
+
+###  http://purl.org/disco#ManifestationContext
+:ManifestationContext rdf:type owl:Class ;
+                      rdfs:subClassOf gufo:Situation ,
+                                      [ rdf:type owl:Restriction ;
+                                        owl:onProperty gufo:historicallyDependsOn ;
+                                        owl:someValuesFrom :DispositionOutcome
+                                      ] ,
+                                      [ rdf:type owl:Restriction ;
+                                        owl:onProperty gufo:contributedToTrigger ;
+                                        owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                        owl:onClass :DispositionManifestation
+                                      ] .
+
+
+###  http://purl.org/disco#ManifestationPartnerDisposition
+:ManifestationPartnerDisposition rdf:type owl:Class ;
+                                 rdfs:subClassOf :InteractiveDisposition ,
+                                                 :ReciprocalDisposition .
+
+
+###  http://purl.org/disco#ObjectQuality
+:ObjectQuality rdf:type owl:Class ;
+               rdfs:subClassOf gufo:Quality ,
+                               [ rdf:type owl:Restriction ;
+                                 owl:onProperty <file:/Users/rodrigocalhau/Documents/VPProjects/null> ;
+                                 owl:someValuesFrom :Disposition
+                               ] ,
+                               [ rdf:type owl:Restriction ;
+                                 owl:onProperty gufo:inheresIn ;
+                                 owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                 owl:onClass gufo:Object
+                               ] .
+
+
+###  http://purl.org/disco#ObjectType
+:ObjectType rdf:type owl:Class ;
+            rdfs:subClassOf gufo:EndurantType .
+
+
+###  http://purl.org/disco#ObjectTypeByLevel
+:ObjectTypeByLevel rdf:type owl:Class ;
+                   rdfs:subClassOf :ObjectType .
+
+
+###  http://purl.org/disco#ParticularDisposition
+:ParticularDisposition rdf:type owl:Class ;
+                       rdfs:subClassOf :Disposition .
+
+
+###  http://purl.org/disco#ParticularDispositionManifestation
+:ParticularDispositionManifestation rdf:type owl:Class ;
+                                    rdfs:subClassOf gufo:Event ,
+                                                    [ rdf:type owl:Restriction ;
+                                                      owl:onProperty [ owl:inverseOf gufo:manifestedIn
+                                                                     ] ;
+                                                      owl:someValuesFrom :ParticularDisposition
+                                                    ] .
+
+
+###  http://purl.org/disco#ReciprocalDisposition
+:ReciprocalDisposition rdf:type owl:Class ;
+                       rdfs:subClassOf :Disposition .
+
+
+###  http://purl.org/disco#ResultantDisposition
+:ResultantDisposition rdf:type owl:Class ;
+                      rdfs:subClassOf :Disposition .
+
+
+###  http://purl.org/disco#SimpleDisposition
+:SimpleDisposition rdf:type owl:Class ;
+                   rdfs:subClassOf :Disposition .
+
+
+###  http://purl.org/disco#SubtractiveDisposition
+:SubtractiveDisposition rdf:type owl:Class ;
+                        rdfs:subClassOf :InteractiveDisposition .
+
+
+###  http://purl.org/nemo/gufo#FunctionalComplex
+gufo:FunctionalComplex rdfs:subClassOf [ rdf:type owl:Restriction ;
+                                         owl:onProperty [ owl:inverseOf gufo:inheresIn
+                                                        ] ;
+                                         owl:someValuesFrom :EmergentDisposition
+                                       ] .
+
+
+#################################################################
+#    Individuals
+#################################################################
+
+###  http://purl.org/disco#AdditionalDisposition
+:AdditionalDisposition rdf:type owl:NamedIndividual ,
+                                gufo:RoleMixin .
+
+
+###  http://purl.org/disco#AtomicEvent
+:AtomicEvent rdf:type owl:NamedIndividual ,
+                      gufo:EventType .
+
+
+###  http://purl.org/disco#ChangingDisposition
+:ChangingDisposition rdf:type owl:NamedIndividual ,
+                              gufo:RoleMixin .
+
+
+###  http://purl.org/disco#ComplexDisposition
+:ComplexDisposition rdf:type owl:NamedIndividual ,
+                             gufo:Category .
+
+
+###  http://purl.org/disco#ComplexEvent
+:ComplexEvent rdf:type owl:NamedIndividual ,
+                       gufo:EventType .
+
+
+###  http://purl.org/disco#DisablingDisposition
+:DisablingDisposition rdf:type owl:NamedIndividual ,
+                               gufo:RoleMixin .
+
+
+###  http://purl.org/disco#Disposition
+:Disposition rdf:type owl:NamedIndividual ,
+                      gufo:Category .
+
+
+###  http://purl.org/disco#DispositionManifestation
+:DispositionManifestation rdf:type owl:NamedIndividual ,
+                                   gufo:EventType .
+
+
+###  http://purl.org/disco#DispositionOutcome
+:DispositionOutcome rdf:type owl:NamedIndividual ,
+                             gufo:SituationType .
+
+
+###  http://purl.org/disco#DispositionOutput
+:DispositionOutput rdf:type owl:NamedIndividual ,
+                            gufo:RoleMixin .
+
+
+###  http://purl.org/disco#DispositionType
+:DispositionType rdf:type owl:NamedIndividual .
+
+
+###  http://purl.org/disco#DispositionTypeByFunction
+:DispositionTypeByFunction rdf:type owl:NamedIndividual .
+
+
+###  http://purl.org/disco#DispositionTypeByLevel
+:DispositionTypeByLevel rdf:type owl:NamedIndividual .
+
+
+###  http://purl.org/disco#EmergentDisposition
+:EmergentDisposition rdf:type owl:NamedIndividual ,
+                              gufo:Category .
+
+
+###  http://purl.org/disco#EmergentDispositionManifestation
+:EmergentDispositionManifestation rdf:type owl:NamedIndividual ,
+                                           gufo:EventType .
+
+
+###  http://purl.org/disco#EnablingDisposition
+:EnablingDisposition rdf:type owl:NamedIndividual ,
+                              gufo:RoleMixin .
+
+
+###  http://purl.org/disco#EventType
+:EventType rdf:type owl:NamedIndividual .
+
+
+###  http://purl.org/disco#FunctionalComplex
+:FunctionalComplex rdf:type owl:NamedIndividual ,
+                            gufo:Category .
+
+
+###  http://purl.org/disco#InteractiveDisposition
+:InteractiveDisposition rdf:type owl:NamedIndividual ,
+                                 gufo:RoleMixin .
+
+
+###  http://purl.org/disco#InteractiveDispositionManifestation
+:InteractiveDispositionManifestation rdf:type owl:NamedIndividual ,
+                                              gufo:EventType .
+
+
+###  http://purl.org/disco#InteractiveDispositionRole
+:InteractiveDispositionRole rdf:type owl:NamedIndividual .
+
+
+###  http://purl.org/disco#InteractiveObject
+:InteractiveObject rdf:type owl:NamedIndividual ,
+                            gufo:RoleMixin .
+
+
+###  http://purl.org/disco#InteractiveObjectRole
+:InteractiveObjectRole rdf:type owl:NamedIndividual .
+
+
+###  http://purl.org/disco#InteractiveRelator
+:InteractiveRelator rdf:type owl:NamedIndividual ,
+                             gufo:Category .
+
+
+###  http://purl.org/disco#InteractiveSituation
+:InteractiveSituation rdf:type owl:NamedIndividual ,
+                               gufo:SituationType .
+
+
+###  http://purl.org/disco#JointManifestation
+:JointManifestation rdf:type owl:NamedIndividual ,
+                             gufo:EventType .
+
+
+###  http://purl.org/disco#LoneDisposition
+:LoneDisposition rdf:type owl:NamedIndividual ,
+                          gufo:Category .
+
+
+###  http://purl.org/disco#LoneManifestation
+:LoneManifestation rdf:type owl:NamedIndividual ,
+                            gufo:EventType .
+
+
+###  http://purl.org/disco#ManifestationContext
+:ManifestationContext rdf:type owl:NamedIndividual ,
+                               gufo:SituationType .
+
+
+###  http://purl.org/disco#ManifestationPartnerDisposition
+:ManifestationPartnerDisposition rdf:type owl:NamedIndividual ,
+                                          gufo:RoleMixin .
+
+
+###  http://purl.org/disco#MomentTypeUFO
+:MomentTypeUFO rdf:type owl:NamedIndividual .
+
+
+###  http://purl.org/disco#Object
+:Object rdf:type owl:NamedIndividual ,
+                 gufo:Category .
+
+
+###  http://purl.org/disco#ObjectQuality
+:ObjectQuality rdf:type owl:NamedIndividual ,
+                        gufo:Category .
+
+
+###  http://purl.org/disco#ObjectType
+:ObjectType rdf:type owl:NamedIndividual .
+
+
+###  http://purl.org/disco#ObjectTypeByLevel
+:ObjectTypeByLevel rdf:type owl:NamedIndividual .
+
+
+###  http://purl.org/disco#ParticularDisposition
+:ParticularDisposition rdf:type owl:NamedIndividual ,
+                                gufo:RoleMixin .
+
+
+###  http://purl.org/disco#ParticularDispositionManifestation
+:ParticularDispositionManifestation rdf:type owl:NamedIndividual ,
+                                             gufo:EventType .
+
+
+###  http://purl.org/disco#ReciprocalDisposition
+:ReciprocalDisposition rdf:type owl:NamedIndividual ,
+                                gufo:Category .
+
+
+###  http://purl.org/disco#ResultantDisposition
+:ResultantDisposition rdf:type owl:NamedIndividual ,
+                               gufo:Category .
+
+
+###  http://purl.org/disco#SimpleDisposition
+:SimpleDisposition rdf:type owl:NamedIndividual ,
+                            gufo:Category .
+
+
+###  http://purl.org/disco#SituationType
+:SituationType rdf:type owl:NamedIndividual .
+
+
+###  http://purl.org/disco#SubtractiveDisposition
+:SubtractiveDisposition rdf:type owl:NamedIndividual ,
+                                 gufo:RoleMixin .
+
+
+###  http://purl.org/disco#interactsWith_1
+:interactsWith_1 rdf:type owl:NamedIndividual ,
+                          gufo:MaterialRelationshipType .
+
+
+#################################################################
+#    Annotations
+#################################################################
+
+:AdditionalDisposition rdfs:comment """Additional dispositions are those that their effects (manifestation) can be ``mixed'' (added), contributing together to achieve the same outcome. 
+
+For example, the (i) attraction disposition of two or more magnets can be added, making their attraction stronger; (ii) a singer and a guitarist's dispositions can be added, allowing a distinct song presentation; (iii) the vibrating dispositions of two or more guitar strings can be added, forming new combined notes.
+
+More information:
+
+R. F. Calhau, J. P. A. Almeida, G. Guizzardi; Ontological Foundation for Interrelating Dispositions within Systems (Pre-Print) 
+
+Available in:
+
+http://purl.org/disc/paper"""@en ;
+                       rdfs:label "AdditionalDisposition"@en .
+
+
+:AtomicEvent rdfs:label "AtomicEvent"@en .
+
+
+:ChangingDisposition rdfs:label "ChangingDisposition"@en ;
+                     rdfs:comment """Changing dispositions are those that alter other dispositions (or oneself) by manifesting themselves. The sharpening ability of the knife sharpener makes the knife sharper (increases the knife's cutting ability).
+
+
+More information:
+
+R. F. Calhau, J. P. A. Almeida, G. Guizzardi; Ontological Foundation for Interrelating Dispositions within Systems (Pre-Print) 
+
+Available in:
+
+http://purl.org/disc/paper"""@en .
+
+
+:ComplexDisposition rdfs:comment """Complex dispositions are those that can have other dispositions as its parts. For example, Pelé's ability to play football is made up of his ability to shoot at goal, dribble, pass the ball, etc.
+
+More information:
+
+R. F. Calhau, J. P. A. Almeida, G. Guizzardi; Ontological Foundation for Interrelating Dispositions within Systems (Pre-Print) 
+
+Available in:
+
+http://purl.org/disc/paper"""@en ;
+                    rdfs:label "ComplexDisposition"@en .
+
+
+:ComplexEvent rdfs:label "ComplexEvent"@en .
+
+
+:DisablingDisposition rdfs:comment """A disabling disposition is one that prevents the manifestation of another disposition (called a disabling disposition). For example, a police officer who disarmed a bank robber before he could shoot has a disabling disposition. In this case, the robber's ability to shoot has been disabled by the disarming capability of police officer.
+
+More information:
+
+R. F. Calhau, J. P. A. Almeida, G. Guizzardi; Ontological Foundation for Interrelating Dispositions within Systems (Pre-Print) 
+
+Available in:
+
+http://purl.org/disc/paper"""@en ;
+                      rdfs:label "DisablingDisposition"@en .
+
+
+:Disposition rdfs:label "Disposition"@en ;
+             rdfs:comment """Dispositions (also named powers, tendencies, potentials, capacities, capabilities, affordances, and propensities) are properties that characterize objects, are manifested by events, and are triggered by a context. A  example is the case of the magnet's disposition to attract ferrous objects. 
+
+
+References: 
+
+GUIZZARDI, Giancarlo; WAGNER, Gerd. Towards an ontological foundation of discrete event simulation. In: Proceedings of the 2010 Winter Simulation Conference. IEEE, 2010. p. 652-664.
+
+
+GUIZZARDI, Giancarlo et al. Towards ontological foundations for the conceptual modeling of events. In: International Conference on Conceptual Modeling. Berlin, Heidelberg: Springer Berlin Heidelberg, 2013. p. 327-341."""@en .
+
+
+:DispositionManifestation rdfs:label "DispositionManifestation"@en .
+
+
+:DispositionOutcome rdfs:label "DispositionOutcome"@en .
+
+
+:DispositionOutput rdfs:label "DispositionOutput"@en .
+
+
+:DispositionType rdfs:label "DispositionType"@en .
+
+
+:DispositionTypeByFunction rdfs:label "DispositionTypeByFunction"@en .
+
+
+:DispositionTypeByLevel rdfs:label "DispositionTypeByLevel"@en .
+
+
+:EmergentDisposition rdfs:label "EmergentDisposition"@en ;
+                     rdfs:comment """Emergent dispositions are those that characterizes a whole (functional complex, i.e., a system) and that arise from the interaction of parts of this whole as a consequence of the emergence phenomena.
+
+E.g., the ability of the 1970 Brazilian team to play football is an emergent disposition, which arises from the interaction of the parties (players).
+
+More information:
+
+R. F. Calhau, J. P. A. Almeida, G. Guizzardi; Ontological Foundation for Interrelating Dispositions within Systems (Pre-Print) 
+
+Available in:
+
+http://purl.org/disc/paper"""@en .
+
+
+:EmergentDispositionManifestation rdfs:label "EmergentDispositionManifestation"@en .
+
+
+:EnablingDisposition rdfs:label "EnablingDisposition"@en ;
+                     rdfs:comment """An enabling disposition is one that enables another disposition, called an enabled disposition. For example, the capability to peel vegetables enables the capability to cut vegetables, which enables the capability to cook vegetables; or, the capability to wash clothes enables the capability to dry clothes.
+
+More information:
+
+R. F. Calhau, J. P. A. Almeida, G. Guizzardi; Ontological Foundation for Interrelating Dispositions within Systems (Pre-Print) 
+
+Available in:
+
+http://purl.org/disc/paper"""@en .
+
+
+:InteractiveDisposition rdfs:label "InteractiveDisposition"@en ;
+                        rdfs:comment """Interactive dispositions are those that can be combined in different ways, depending on their nature (defined by a type). In Disc-O, these different ways of combining dispositions are defined through relationships, known as horizontal relationships. The horizontal relations we consider here include: reciprocity, complementarity (additionality), invalidation (subtraction), enabling, disabling, and change.
+
+More information:
+
+R. F. Calhau, J. P. A. Almeida, G. Guizzardi; Ontological Foundation for Interrelating Dispositions within Systems (Pre-Print) 
+
+Available in:
+
+http://purl.org/disc/paper"""@en .
+
+
+:InteractiveDispositionManifestation rdfs:label "InteractiveDispositionManifestation"@en .
+
+
+:InteractiveDispositionRole rdfs:label "InteractiveDispositionRole"@en .
+
+
+:InteractiveObject rdfs:label "InteractiveObject"@en .
+
+
+:InteractiveObjectRole rdfs:label "InteractiveObjectRole"@en .
+
+
+:InteractiveRelator gufo:isDerivedFrom :interactsWith_1 ;
+                    rdfs:label "InteractiveRelator"@en .
+
+
+:InteractiveSituation rdfs:label "InteractiveSituation"@en .
+
+
+:JointManifestation rdfs:label "JointManifestation"@en .
+
+
+:LoneDisposition rdfs:label "LoneDisposition"@en .
+
+
+:LoneManifestation rdfs:label "LoneManifestation"@en .
+
+
+:ManifestationContext rdfs:label "ManifestationContext"@en .
+
+
+:ManifestationPartnerDisposition rdfs:label "ManifestationDispositionPartner"@en .
+
+
+:ObjectQuality rdfs:label "ObjectQuality"@en .
+
+
+:ObjectType rdfs:label "ObjectType"@en .
+
+
+:ObjectTypeByLevel rdfs:label "ObjectTypebyLevel"@en .
+
+
+:ParticularDisposition rdfs:label "ParticularDisposition"@en .
+
+
+:ParticularDispositionManifestation rdfs:label "ParticularDispositionManifestation"@en .
+
+
+:ReciprocalDisposition rdfs:label "ReciprocalDisposition"@en .
+
+
+:ResultantDisposition rdfs:label "ResultantDisposition"@en .
+
+
+:SimpleDisposition rdfs:label "SimpleDisposition"@en .
+
+
+:SubtractiveDisposition rdfs:comment """Subtractive dispositions are those whose outcomes cancel, annul, or subtract each other. For example, in this case, suppose a heater h and an air conditioner a, with respective heating and cooling dispositions, are installed in the same environment. In this situation, when h and a are turned on at the same time, their dispositions subtract the effect of each other, and as a result, they are dispositions with subtractive effects.
+
+
+More information:
+
+R. F. Calhau, J. P. A. Almeida, G. Guizzardi; Ontological Foundation for Interrelating Dispositions within Systems (Pre-Print) 
+
+Available in:
+
+http://purl.org/disc/paper"""@en ;
+                        rdfs:label "SubtractiveDisposition"@en .
+
+
+:interactsWith_1 rdfs:label "interactsWithObject"@en .
+
+
+###  Generated by the OWL API (version 4.5.9.2019-02-01T07:24:44Z) https://github.com/owlcs/owlapi
