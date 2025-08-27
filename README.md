@@ -48,28 +48,28 @@ See <http://purl.org/nemo/doc/gufo> for the foundational ontology employed.
 
 The sub-ontologies contain the following main concepts: Disposition, Disposition Manifestation, Manifestation Context, Disposition Outcome, and Disposition Output. As illustrated, dispositions characterize objects and possess qualities of this object as their categorical base. Dispositions manifest through a disposition manifestation (event), triggered by a manifestation context (situation), generating a disposition outcome (situation) and also, possibly, disposition outcomes (object).
 
-<img src="./img/disposition.png" alt="Core Concepts Sub-Ontology" />
+<img src="./img/disposition.png" alt="Core Concepts Sub-Ontology" width=70% style="text-align: center;"/>
 
 ### Interactive Disposition Sub-Ontology
 
 Dispositions can be lone or reciprocal. Lone dispositions manifest themselves alone, while reciprocal dispositions require other dispositions to manifest themselves. A disposition is considered interactive when it interacts with other dispositions.
 
-<img src="./img/disposition_interaction1.png" alt="Interactive Disposition Sub-Ontology" />
+<img src="./img/disposition_interaction1.png" alt="Interactive Disposition Sub-Ontology" width=70%  style="text-align: center;"/>
 
 #### Types of Interactive Dispositions
 Interactive dispositions can be: Additional, Subtractive, Manifestation Disposition Partner, Enabling, Disabling, Changing Disposition.
 
-<img src="./img/disposition_interaction3.png" alt="Interactive Disposition  Sub-Ontology" width=70% />
+<img src="./img/disposition_interaction3.png" alt="Interactive Disposition  Sub-Ontology" width=70% style="text-align: center;"/>
 
 ### Emergent Disposition Sub-Ontology
 Emergent dispositions characterize a whole (functional complex) and emerge from particular dispositions (which characterize parts). Resultant dispositions also characterize a whole but are derived directly from particular dispositions. Dispositions can also be simple or complex. Complex dispositions are those formed from other dispositions.
 
-<img src="./img/disposition_emergence.png" alt="Disposition Emergence Sub-Ontology" />
+<img src="./img/disposition_emergence.png" alt="Disposition Emergence Sub-Ontology" width=70% style="text-align: center;"/>
 
 ### Disposition Type Sub-Ontology
 Dispositions instantiate disposition types. Disposition types include interactive disposition roles, which correspond to the roles played by dispositions when they interact. They can also be classified by level or function.
 
-<img src="./img/disposition_type.png" alt="Disposition Type Sub-Ontology" />
+<img src="./img/disposition_type.png" alt="Disposition Type Sub-Ontology" width=70% style="text-align: center;"/>
 
 
 
