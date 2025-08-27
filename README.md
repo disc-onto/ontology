@@ -26,13 +26,13 @@ This work is distributed under Creative Commons Attribution License CC BY 4.0 <h
 For the source repository, see: <https://github.com/disc-onto/ontology
 
 
-A reference version in OntoUML ([disc_ontology.vpp](disposition_ontology.vpp)) and a gUFO-based operational version in OWL [disposition_ontology.ttl](disposition_ontology.ttl) are included in this repository. 
+A reference version in OntoUML ([disposition_ontology.vpp](./disc_ontology.vpp)) and a gUFO-based operational version in OWL [disposition_ontology.ttl](./disposition_ontology.ttl) are included in this repository. 
 
 Both are published following FAIR principles. The reference version in OntoUML is published in the [OntoUML/UFO FAIR catalog](https://scs-ontouml.eemcs.utwente.nl/). The OWL version can be found in [https://purl.org/disc#](https://purl.org/disc). 
 
 To use the OntoUML version, use the [OntoUML Visual Paradigm plugin](https://github.com/OntoUML/ontouml-vp-plugin).
 
-To import Disc-O in Protégé use <https://purl.org/coreo#> (using `https` instead of `http`). (This is required in Protégé up to 5.6.1 as it uses a version of the OWL API that is unable to handle multiple http redirects.)
+To import Disc-O in Protégé use <https://purl.org/disc#> (using `https` instead of `http`). (This is required in Protégé up to 5.6.1 as it uses a version of the OWL API that is unable to handle multiple http redirects.)
 
 Authors:
 
