@@ -1,4 +1,4 @@
-@prefix : <http://purl.org/disco#> .
+@prefix : <http://purl.org/disc-o#> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix xml: <http://www.w3.org/XML/1998/namespace> .
@@ -103,6 +103,13 @@ rdf:type rdf:type owl:AnnotationProperty .
                                                       rdfs:domain :ObjectQuality ;
                                                       rdfs:range :Disposition ;
                                                       rdfs:label "categoricalBaseOf"@en .
+
+
+###  http://purl.org/disc-o#InteractionPartitionedInto
+:InteractionPartitionedInto rdf:type owl:ObjectProperty ;
+                            rdfs:subPropertyOf :partitionedInto ;
+                            rdfs:domain :Interaction ;
+                            rdfs:range gufo:Participation .
 
 
 ###  http://purl.org/disc-o#activation
@@ -244,6 +251,15 @@ rdf:type rdf:type owl:AnnotationProperty .
                 rdfs:label "isAdditionalTo"@en .
 
 
+###  http://purl.org/disc-o#isDispositionManifestationProperPartOf
+:isDispositionManifestationProperPartOf rdf:type owl:ObjectProperty ;
+                                        rdfs:subPropertyOf gufo:isEventProperPartOf ;
+                                        rdfs:domain :Interaction ,
+                                                    :InternalEvent ,
+                                                    gufo:Participation ;
+                                        rdfs:range :DispositionManifestation .
+
+
 ###  http://purl.org/disc-o#isDispositionProperPartOf
 :isDispositionProperPartOf rdf:type owl:ObjectProperty ;
                            rdfs:subPropertyOf gufo:isAspectProperPartOf ;
@@ -288,6 +304,12 @@ rdf:type rdf:type owl:AnnotationProperty .
                rdfs:domain :ObjectType ;
                rdfs:range gufo:EventType ;
                rdfs:label "participation"@en .
+
+
+###  http://purl.org/disc-o#partitionedInto
+:partitionedInto rdf:type owl:ObjectProperty ;
+                 rdfs:domain gufo:Event ;
+                 rdfs:range gufo:Participation .
 
 
 ###  http://purl.org/disc-o#resultsFrom
@@ -438,6 +460,17 @@ rdf:type rdf:type owl:AnnotationProperty .
                      rdfs:subClassOf :InteractiveDisposition .
 
 
+###  http://purl.org/disc-o#Interaction
+:Interaction rdf:type owl:Class ;
+             rdfs:subClassOf gufo:Event ,
+                             [ rdf:type owl:Restriction ;
+                               owl:onProperty [ owl:inverseOf gufo:contributedToTrigger
+                                              ] ;
+                               owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                               owl:onClass :InteractiveSituation
+                             ] .
+
+
 ###  http://purl.org/disc-o#InteractiveDisposition
 :InteractiveDisposition rdf:type owl:Class ;
                         rdfs:subClassOf :Disposition ,
@@ -504,6 +537,11 @@ rdf:type rdf:type owl:AnnotationProperty .
 ###  http://purl.org/disc-o#InteractiveSituation
 :InteractiveSituation rdf:type owl:Class ;
                       rdfs:subClassOf gufo:Situation .
+
+
+###  http://purl.org/disc-o#InternalEvent
+:InternalEvent rdf:type owl:Class ;
+               rdfs:subClassOf gufo:Event .
 
 
 ###  http://purl.org/disc-o#JointManifestation
@@ -620,6 +658,14 @@ gufo:FunctionalComplex rdfs:subClassOf [ rdf:type owl:Restriction ;
                                        ] .
 
 
+###  http://purl.org/nemo/gufo#Participation
+gufo:Participation rdfs:subClassOf [ rdf:type owl:Restriction ;
+                                     owl:onProperty [ owl:inverseOf gufo:isEventProperPartOf
+                                                    ] ;
+                                     owl:someValuesFrom :Interaction
+                                   ] .
+
+
 #################################################################
 #    Individuals
 #################################################################
@@ -710,6 +756,11 @@ gufo:FunctionalComplex rdfs:subClassOf [ rdf:type owl:Restriction ;
                             gufo:Category .
 
 
+###  http://purl.org/disc-o#Interaction
+:Interaction rdf:type owl:NamedIndividual ,
+                      gufo:EventType .
+
+
 ###  http://purl.org/disc-o#InteractiveDisposition
 :InteractiveDisposition rdf:type owl:NamedIndividual ,
                                  gufo:RoleMixin .
@@ -741,6 +792,11 @@ gufo:FunctionalComplex rdfs:subClassOf [ rdf:type owl:Restriction ;
 ###  http://purl.org/disc-o#InteractiveSituation
 :InteractiveSituation rdf:type owl:NamedIndividual ,
                                gufo:SituationType .
+
+
+###  http://purl.org/disc-o#InternalEvent
+:InternalEvent rdf:type owl:NamedIndividual ,
+                        gufo:EventType .
 
 
 ###  http://purl.org/disc-o#JointManifestation
@@ -833,7 +889,8 @@ gufo:FunctionalComplex rdfs:subClassOf [ rdf:type owl:Restriction ;
 #    Annotations
 #################################################################
 
-:AdditionalDisposition rdfs:comment """Additional dispositions are those that their effects (manifestation) can be ``mixed'' (added), contributing together to achieve the same outcome. 
+:AdditionalDisposition rdfs:label "AdditionalDisposition"@en ;
+                       rdfs:comment """Additional dispositions are those that their effects (manifestation) can be ``mixed'' (added), contributing together to achieve the same outcome. 
 
 For example, the (i) attraction disposition of two or more magnets can be added, making their attraction stronger; (ii) a singer and a guitarist's dispositions can be added, allowing a distinct song presentation; (iii) the vibrating dispositions of two or more guitar strings can be added, forming new combined notes.
 
@@ -843,8 +900,7 @@ R. F. Calhau, J. P. A. Almeida, G. Guizzardi; Ontological Foundation for Interre
 
 Available in:
 
-http://purl.org/disc-o/paper"""@en ;
-                       rdfs:label "AdditionalDisposition"@en .
+http://purl.org/disc-o/paper"""@en .
 
 
 :AtomicEvent rdfs:label "AtomicEvent"@en .
@@ -920,8 +976,7 @@ GUIZZARDI, Giancarlo et al. Towards ontological foundations for the conceptual m
 :DispositionTypeByLevel rdfs:label "DispositionTypeByLevel"@en .
 
 
-:EmergentDisposition rdfs:label "EmergentDisposition"@en ;
-                     rdfs:comment """Emergent dispositions are those that characterizes a whole (functional complex, i.e., a system) and that arise from the interaction of parts of this whole as a consequence of the emergence phenomena.
+:EmergentDisposition rdfs:comment """Emergent dispositions are those that characterizes a whole (functional complex, i.e., a system) and that arise from the interaction of parts of this whole as a consequence of the emergence phenomena.
 
 E.g., the ability of the 1970 Brazilian team to play football is an emergent disposition, which arises from the interaction of the parties (players).
 
@@ -931,7 +986,8 @@ R. F. Calhau, J. P. A. Almeida, G. Guizzardi; Ontological Foundation for Interre
 
 Available in:
 
-http://purl.org/disc-o/paper"""@en .
+http://purl.org/disc-o/paper"""@en ;
+                     rdfs:label "EmergentDisposition"@en .
 
 
 :EmergentDispositionManifestation rdfs:label "EmergentDispositionManifestation"@en .
@@ -949,8 +1005,10 @@ http://purl.org/disc-o/paper"""@en ;
                      rdfs:label "EnablingDisposition"@en .
 
 
-:InteractiveDisposition rdfs:label "InteractiveDisposition"@en ;
-                        rdfs:comment """Interactive dispositions are those that can be combined in different ways, depending on their nature (defined by a type). In Disc-O, these different ways of combining dispositions are defined through relationships, known as horizontal relationships. The horizontal relations we consider here include: reciprocity, complementarity (additionality), invalidation (subtraction), enabling, disabling, and change.
+:Interaction rdfs:label "Interaction"@en .
+
+
+:InteractiveDisposition rdfs:comment """Interactive dispositions are those that can be combined in different ways, depending on their nature (defined by a type). In Disc-O, these different ways of combining dispositions are defined through relationships, known as horizontal relationships. The horizontal relations we consider here include: reciprocity, complementarity (additionality), invalidation (subtraction), enabling, disabling, and change.
 
 More information:
 
@@ -958,7 +1016,8 @@ R. F. Calhau, J. P. A. Almeida, G. Guizzardi; Ontological Foundation for Interre
 
 Available in:
 
-http://purl.org/disc-o/paper"""@en .
+http://purl.org/disc-o/paper"""@en ;
+                        rdfs:label "InteractiveDisposition"@en .
 
 
 :InteractiveDispositionManifestation rdfs:label "InteractiveDispositionManifestation"@en .
@@ -973,11 +1032,15 @@ http://purl.org/disc-o/paper"""@en .
 :InteractiveObjectRole rdfs:label "InteractiveObjectRole"@en .
 
 
-:InteractiveRelator rdfs:label "InteractiveRelator"@en ;
+:InteractiveRelator rdfs:label "Interactive Relator"@en ,
+                               "InteractiveRelator"@en ;
                     gufo:isDerivedFrom :interactsWith_1 .
 
 
 :InteractiveSituation rdfs:label "InteractiveSituation"@en .
+
+
+:InternalEvent rdfs:label "InternalEvent"@en .
 
 
 :JointManifestation rdfs:label "JointManifestation"@en .
@@ -1029,8 +1092,7 @@ http://purl.org/disc-o/paper""" ;
 :SimpleDisposition rdfs:label "SimpleDisposition"@en .
 
 
-:SubtractiveDisposition rdfs:label "SubtractiveDisposition"@en ;
-                        rdfs:comment """Subtractive dispositions are those whose outcomes cancel, annul, or subtract each other. For example, in this case, suppose a heater h and an air conditioner a, with respective heating and cooling dispositions, are installed in the same environment. In this situation, when h and a are turned on at the same time, their dispositions subtract the effect of each other, and as a result, they are dispositions with subtractive effects.
+:SubtractiveDisposition rdfs:comment """Subtractive dispositions are those whose outcomes cancel, annul, or subtract each other. For example, in this case, suppose a heater h and an air conditioner a, with respective heating and cooling dispositions, are installed in the same environment. In this situation, when h and a are turned on at the same time, their dispositions subtract the effect of each other, and as a result, they are dispositions with subtractive effects.
 
 
 More information:
@@ -1039,7 +1101,8 @@ R. F. Calhau, J. P. A. Almeida, G. Guizzardi; Ontological Foundation for Interre
 
 Available in:
 
-http://purl.org/disc-o/paper"""@en .
+http://purl.org/disc-o/paper"""@en ;
+                        rdfs:label "SubtractiveDisposition"@en .
 
 
 :interactsWith_1 rdfs:label "interactsWithObject"@en .
