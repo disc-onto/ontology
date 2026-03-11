@@ -11,18 +11,18 @@
                           owl:versionIRI <http://purl.org/disc-o/1.0.0> ;
                           owl:imports gufo: ,
                                       <http://purl.org/nemo/gufo#/1.0.0> ;
-                          <http://purl.org/dc/elements/1.1/creator> """<https://orcid.org/0009-0006-6051-2165>,
-<https://orcid.org/0000-0002-9819-3781>,
-<https://orcid.org/0000-0002-3452-553X>"""@en ;
+                          <http://purl.org/dc/elements/1.1/creator> """https://orcid.org/0009-0006-6051-2165,
+https://orcid.org/0000-0002-9819-3781,
+https://orcid.org/0000-0002-3452-553X"""@en ;
                           <http://purl.org/dc/elements/1.1/title> "Disc-O: Disposition Interaction Core Ontology"@en ;
                           <http://purl.org/dc/terms/bibliographicCitation> "Calhau, R. F.; J.P.A. Almeida; Guizzardi, G.; \"Disc-O: Disposition Interaction Core Ontology\", 2025, http://purl.org/disc"@en ;
                           <http://purl.org/dc/terms/created> "2025-08-27"@en ;
                           <http://purl.org/dc/terms/issued> "2025-08-27"@en ;
                           <http://purl.org/dc/terms/license> "https://creativecommons.org/licenses/by/4.0/legalcode"@en ;
                           <http://purl.org/dc/terms/modified> "2025-08-27"@en ;
-                          <http://purl.org/dc/terms/publisher> """<https://www.utwente.nl/eemcs/scs/>
-<https://nemo.inf.ufes.br/>
-<https://leds.ifes.edu.br/>"""@en ;
+                          <http://purl.org/dc/terms/publisher> """https://www.utwente.nl/eemcs/scs/,
+https://nemo.inf.ufes.br/,
+https://leds.ifes.edu.br/"""@en ;
                           <http://purl.org/vocab/vann/preferredNamespacePrefix> "disc-o"@en ;
                           <http://purl.org/vocab/vann/preferredNamespaceUri> "http://purl.com/disc-o"@en ;
                           rdf:type "http://purl.org/vocommons/voaf#Vocabulary"@en ;
@@ -63,8 +63,8 @@ For the source repository, see: <https://github.com/disc-onto/ontology"""@en ;
 
 
 For the source repository, see: <https://github.com/disc-onto/ontology"""@en ;
-                          owl:priorVersion "0.0.9"@en ;
-                          owl:versionInfo "1.0.0"@en .
+                          owl:priorVersion "1.0.0"@en ;
+                          owl:versionInfo "1.0.1"@en .
 
 #################################################################
 #    Annotation properties
@@ -86,10 +86,6 @@ For the source repository, see: <https://github.com/disc-onto/ontology"""@en ;
 <http://purl.org/dc/terms/publisher> rdf:type owl:AnnotationProperty .
 
 
-###  http://purl.org/nemo/gufo#isDerivedFrom
-gufo:isDerivedFrom rdf:type owl:AnnotationProperty .
-
-
 ###  http://www.w3.org/1999/02/22-rdf-syntax-ns#type
 rdf:type rdf:type owl:AnnotationProperty .
 
@@ -99,10 +95,7 @@ rdf:type rdf:type owl:AnnotationProperty .
 #################################################################
 
 ###  file:/Users/rodrigocalhau/Documents/VPProjects/null
-<file:/Users/rodrigocalhau/Documents/VPProjects/null> rdf:type owl:ObjectProperty ;
-                                                      rdfs:domain :ObjectQuality ;
-                                                      rdfs:range :Disposition ;
-                                                      rdfs:label "categoricalBaseOf"@en .
+<file:/Users/rodrigocalhau/Documents/VPProjects/null> rdf:type owl:ObjectProperty .
 
 
 ###  http://purl.org/disc-o#InteractionPartitionedInto
@@ -137,6 +130,13 @@ rdf:type rdf:type owl:AnnotationProperty .
                  rdfs:domain gufo:EventType ;
                  rdfs:range gufo:SituationType ;
                  rdfs:label "bringingAboutOf"@en .
+
+
+###  http://purl.org/disc-o#categoricalBaseOf
+:categoricalBaseOf rdf:type owl:ObjectProperty ;
+                   rdfs:domain :ObjectQuality ;
+                   rdfs:range :Disposition ;
+                   rdfs:label "categoricalBaseOf"@en .
 
 
 ###  http://purl.org/disc-o#changes
@@ -338,6 +338,11 @@ rdf:type rdf:type owl:AnnotationProperty .
 #    Classes
 #################################################################
 
+###  http://purl.com/cosy#MomentType
+<http://purl.com/cosy#MomentType> rdf:type owl:Class ;
+                                  rdfs:subClassOf gufo:EndurantType .
+
+
 ###  http://purl.org/disc-o#AdditionalDisposition
 :AdditionalDisposition rdf:type owl:Class ;
                        rdfs:subClassOf :InteractiveDisposition .
@@ -345,7 +350,7 @@ rdf:type rdf:type owl:AnnotationProperty .
 
 ###  http://purl.org/disc-o#AtomicEvent
 :AtomicEvent rdf:type owl:Class ;
-             rdfs:subClassOf gufo:Event ,
+             rdfs:subClassOf :DispositionManifestation ,
                              [ rdf:type owl:Restriction ;
                                owl:onProperty [ owl:inverseOf gufo:manifestedIn
                                               ] ;
@@ -366,7 +371,7 @@ rdf:type rdf:type owl:AnnotationProperty .
 
 ###  http://purl.org/disc-o#ComplexEvent
 :ComplexEvent rdf:type owl:Class ;
-              rdfs:subClassOf gufo:Event .
+              rdfs:subClassOf :DispositionManifestation .
 
 
 ###  http://purl.org/disc-o#DisablingDisposition
@@ -386,10 +391,6 @@ rdf:type rdf:type owl:AnnotationProperty .
 ###  http://purl.org/disc-o#DispositionManifestation
 :DispositionManifestation rdf:type owl:Class ;
                           rdfs:subClassOf gufo:Event ,
-                                          [ rdf:type owl:Restriction ;
-                                            owl:onProperty gufo:participatedIn ;
-                                            owl:someValuesFrom :DispositionOutput
-                                          ] ,
                                           [ rdf:type owl:Restriction ;
                                             owl:onProperty [ owl:inverseOf gufo:manifestedIn
                                                            ] ;
@@ -430,7 +431,7 @@ rdf:type rdf:type owl:AnnotationProperty .
 
 ###  http://purl.org/disc-o#DispositionType
 :DispositionType rdf:type owl:Class ;
-                 rdfs:subClassOf gufo:EndurantType .
+                 rdfs:subClassOf <http://purl.com/cosy#MomentType> .
 
 
 ###  http://purl.org/disc-o#DispositionTypeByFunction
@@ -456,7 +457,7 @@ rdf:type rdf:type owl:AnnotationProperty .
 
 ###  http://purl.org/disc-o#EmergentDispositionManifestation
 :EmergentDispositionManifestation rdf:type owl:Class ;
-                                  rdfs:subClassOf gufo:Event ,
+                                  rdfs:subClassOf :DispositionManifestation ,
                                                   [ rdf:type owl:Restriction ;
                                                     owl:onProperty [ owl:inverseOf gufo:participatedIn
                                                                    ] ;
@@ -488,12 +489,7 @@ rdf:type rdf:type owl:AnnotationProperty .
 
 ###  http://purl.org/disc-o#InteractiveDisposition
 :InteractiveDisposition rdf:type owl:Class ;
-                        rdfs:subClassOf :Disposition ,
-                                        [ rdf:type owl:Restriction ;
-                                          owl:onProperty [ owl:inverseOf gufo:inheresIn
-                                                         ] ;
-                                          owl:someValuesFrom :InteractiveObject
-                                        ] .
+                        rdfs:subClassOf :Disposition .
 
 
 ###  http://purl.org/disc-o#InteractiveDispositionManifestation
@@ -525,11 +521,6 @@ rdf:type rdf:type owl:AnnotationProperty .
                                      owl:onProperty [ owl:inverseOf gufo:mediates
                                                     ] ;
                                      owl:someValuesFrom :InteractiveRelator
-                                   ] ,
-                                   [ rdf:type owl:Restriction ;
-                                     owl:onProperty gufo:inheresIn ;
-                                     owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
-                                     owl:onClass :InteractiveDisposition
                                    ] .
 
 
@@ -637,7 +628,7 @@ rdf:type rdf:type owl:AnnotationProperty .
 
 ###  http://purl.org/disc-o#ParticularDispositionManifestation
 :ParticularDispositionManifestation rdf:type owl:Class ;
-                                    rdfs:subClassOf gufo:Event ,
+                                    rdfs:subClassOf :DispositionManifestation ,
                                                     [ rdf:type owl:Restriction ;
                                                       owl:onProperty [ owl:inverseOf gufo:manifestedIn
                                                                      ] ;
@@ -920,7 +911,10 @@ http://purl.org/disc-o/paper"""@en ;
                        rdfs:label "AdditionalDisposition"@en .
 
 
-:AtomicEvent rdfs:label "AtomicEvent"@en .
+:AtomicEvent rdfs:comment """A simple manifestation of a disposition that does not have other manifestations as proper parts.
+Reference: R. F. Calhau, J. P. A. Almeida, G. Guizzardi; Disc-O: An Ontology of Dispositions and their Interrelations within Systems (2025).
+Link: http://purl.org/disc-o/paper"""@en ;
+             rdfs:label "SimpleDispositionManifestation"@en .
 
 
 :ChangingDisposition rdfs:comment """Changing dispositions are those that alter other dispositions (or oneself) by manifesting themselves. The sharpening ability of the knife sharpener makes the knife sharper (increases the knife's cutting ability).
@@ -948,7 +942,10 @@ http://purl.org/disc-o/paper"""@en ;
                     rdfs:label "ComplexDisposition"@en .
 
 
-:ComplexEvent rdfs:label "ComplexEvent"@en .
+:ComplexEvent rdfs:comment """A manifestation event that is composed of multiple simpler manifestation events.
+Reference: R. F. Calhau, J. P. A. Almeida, G. Guizzardi; Disc-O: An Ontology of Dispositions and their Interrelations within Systems (2025).
+Link: http://purl.org/disc-o/paper"""@en ;
+              rdfs:label "ComplexDispositionManifestation"@en .
 
 
 :DisablingDisposition rdfs:comment """A disabling disposition is one that prevents the manifestation of another disposition (called a disabling disposition). For example, a police officer who disarmed a bank robber before he could shoot has a disabling disposition. In this case, the robber's ability to shoot has been disabled by the disarming capability of police officer.
@@ -975,22 +972,38 @@ GUIZZARDI, Giancarlo et al. Towards ontological foundations for the conceptual m
              rdfs:label "Disposition"@en .
 
 
-:DispositionManifestation rdfs:label "DispositionManifestation"@en .
+:DispositionManifestation rdfs:comment """The event that occurs when a disposition is triggered, leading to a specific outcome.
+Reference: R. F. Calhau, J. P. A. Almeida, G. Guizzardi; Disc-O: An Ontology of Dispositions and their Interrelations within Systems (2025).
+Link: http://purl.org/disc-o/paper"""@en ;
+                          rdfs:label "DispositionManifestation"@en .
 
 
-:DispositionOutcome rdfs:label "DispositionOutcome"@en .
+:DispositionOutcome rdfs:comment """A situation that is brought about by a disposition manifestation. It represents the state of affairs reached after the disposition is realized.
+
+Example: The state of a room being illuminated as the outcome of a lamp's disposition to light up.
+Reference: R. F. Calhau, J. P. A. Almeida, G. Guizzardi; Disc-O: An Ontology of Dispositions and their Interrelations within Systems (2025).
+Link: http://purl.org/disc-o/paper"""@en ;
+                    rdfs:label "DispositionOutcome"@en .
 
 
-:DispositionOutput rdfs:label "DispositionOutput"@en .
+:DispositionOutput rdfs:comment """An object or entity produced or significantly modified by a disposition manifestation.
+
+Example: A printed document produced by the manifestation of a printer's disposition to print.
+Reference: R. F. Calhau, J. P. A. Almeida, G. Guizzardi; Disc-O: An Ontology of Dispositions and their Interrelations within Systems (2025).
+Link: http://purl.org/disc-o/paper"""@en ;
+                   rdfs:label "DispositionOutput"@en .
 
 
-:DispositionType rdfs:label "DispositionType"@en .
+:DispositionType rdfs:comment """A high-level type that classifies specific dispositions. It serves as a classification for instances of dispositions that share the same manifestation and trigger conditions.
+Reference: R. F. Calhau, J. P. A. Almeida, G. Guizzardi; Disc-O: An Ontology of Dispositions and their Interrelations within Systems (2025).
+Link: http://purl.org/disc-o/paper"""@en ;
+                 rdfs:label "DispositionType"@en .
 
 
-:DispositionTypeByFunction rdfs:label "DispositionTypeByFunction"@en .
-
-
-:DispositionTypeByLevel rdfs:label "DispositionTypeByLevel"@en .
+:DispositionTypeByFunction rdfs:comment """A classification of disposition types based on the specific function or role they perform within a system (e.g., control dispositions, transformative dispositions).
+Reference: R. F. Calhau, J. P. A. Almeida, G. Guizzardi; Disc-O: An Ontology of Dispositions and their Interrelations within Systems (2025).
+Link: http://purl.org/disc-o/paper"""@en ;
+                           rdfs:label "DispositionTypeByFunction"@en .
 
 
 :EmergentDisposition rdfs:comment """Emergent dispositions are those that characterizes a whole (functional complex, i.e., a system) and that arise from the interaction of parts of this whole as a consequence of the emergence phenomena.
@@ -1022,7 +1035,11 @@ http://purl.org/disc-o/paper"""@en ;
                      rdfs:label "EnablingDisposition"@en .
 
 
-:Interaction rdfs:label "Interaction"@en .
+:Interaction rdfs:comment """A joint event composed of the manifestations of reciprocal dispositions from different objects.
+Example: a conversation between two team member. 
+Reference: R. F. Calhau, J. P. A. Almeida, G. Guizzardi; Disc-O: An Ontology of Dispositions and their Interrelations within Systems (2025).
+Link: http://purl.org/disc-o/paper"""@en ;
+             rdfs:label "Interaction"@en .
 
 
 :InteractiveDisposition rdfs:comment """Interactive dispositions are those that can be combined in different ways, depending on their nature (defined by a type). In Disc-O, these different ways of combining dispositions are defined through relationships, known as horizontal relationships. The horizontal relations we consider here include: reciprocity, complementarity (additionality), invalidation (subtraction), enabling, disabling, and change.
@@ -1037,37 +1054,91 @@ http://purl.org/disc-o/paper"""@en ;
                         rdfs:label "InteractiveDisposition"@en .
 
 
-:InteractiveDispositionManifestation rdfs:label "InteractiveDispositionManifestation"@en .
+:InteractiveDispositionManifestation rdfs:comment """A manifestation event that involves one or more interactive dispositions. It can be a part of a larger interaction or a joint manifestation.
+
+Example: The synchronized vibration of multiple guitar strings forming a specific musical chord.
+Reference: R. F. Calhau, J. P. A. Almeida, G. Guizzardi; Disc-O: An Ontology of Dispositions and their Interrelations within Systems (2025).
+Link: http://purl.org/disc-o/paper"""@en ;
+                                     rdfs:label "InteractiveDispositionManifestation"@en .
 
 
-:InteractiveDispositionRole rdfs:label "InteractiveDispositionRole"@en .
+:InteractiveDispositionRole rdfs:comment """A role played by a disposition type when it is part of a specific interaction pattern or horizontal relationship.
+
+Example: A 'cutting' disposition playing the role of an 'enabled' disposition by a 'peeling' disposition.
+Reference: R. F. Calhau, J. P. A. Almeida, G. Guizzardi; Disc-O: An Ontology of Dispositions and their Interrelations within Systems (2025).
+Link: http://purl.org/disc-o/paper"""@en ;
+                            rdfs:label "InteractiveDispositionRole"@en .
 
 
-:InteractiveObject rdfs:label "InteractiveObject"@en .
+:InteractiveObject rdfs:comment """An object that bears interactive dispositions and participates in interactions with other objects.
+Example: a team member collaborating with another, an user making coffee with a coffee machine.
+Reference: R. F. Calhau, J. P. A. Almeida, G. Guizzardi; Disc-O: An Ontology of Dispositions and their Interrelations within Systems (2025).
+Link: http://purl.org/disc-o/paper"""@en ;
+                   rdfs:label "InteractiveObject"@en .
 
 
-:InteractiveObjectRole rdfs:label "InteractiveObjectRole"@en .
+:InteractiveObjectRole rdfs:comment """A role played by an object type when it participates in an interaction mediated by a relator, bearing specific interactive dispositions.
+
+Example: A 'student' object playing a role in a classroom interaction, bearing the disposition to 'learn'.
+Reference: R. F. Calhau, J. P. A. Almeida, G. Guizzardi; Disc-O: An Ontology of Dispositions and their Interrelations within Systems (2025).
+Link: http://purl.org/disc-o/paper"""@en ;
+                       rdfs:label "InteractiveObjectRole"@en .
 
 
-:InteractiveRelator rdfs:label "InteractiveRelator"@en .
+:InteractiveRelator rdfs:comment """A relator that mediates the interaction between two or more interactive objects, grounding the horizontal relationships between their dispositions.
+
+Example: An educational agreement that mediates the interaction between a teacher's teaching and a student's learning.
+Reference: R. F. Calhau, J. P. A. Almeida, G. Guizzardi; Disc-O: An Ontology of Dispositions and their Interrelations within Systems (2025).
+Link: http://purl.org/disc-o/paper"""@en ;
+                    rdfs:label "InteractiveRelator"@en .
 
 
-:InteractiveSituation rdfs:label "InteractiveSituation"@en .
+:InteractiveSituation rdfs:comment """A situation that triggers an interaction between multiple dispositions or serves as the context for joint manifestations.
+
+Example: Two magnets being brought into close proximity, triggering their reciprocal attraction.
+Reference: R. F. Calhau, J. P. A. Almeida, G. Guizzardi; Disc-O: An Ontology of Dispositions and their Interrelations within Systems (2025).
+Link: http://purl.org/disc-o/paper"""@en ;
+                      rdfs:label "InteractiveSituation"@en .
 
 
-:InternalEvent rdfs:label "InternalEvent"@en .
+:InternalEvent rdfs:comment """An event that occurs within the boundaries of a system, often representing a manifestation of a part's disposition.
+
+Example: The internal combustion in an engine's cylinder that contributes to the car's movement.
+Reference: R. F. Calhau, J. P. A. Almeida, G. Guizzardi; Disc-O: An Ontology of Dispositions and their Interrelations within Systems (2025).
+Link: http://purl.org/disc-o/paper"""@en ;
+               rdfs:label "InternalEvent"@en .
 
 
-:JointManifestation rdfs:label "JointManifestation"@en .
+:JointManifestation rdfs:comment """A specific type of manifestation that occurs when multiple partner dispositions are triggered simultaneously. 
+
+Example: Two people lifting a heavy object together.
+Reference: R. F. Calhau, J. P. A. Almeida, G. Guizzardi; Disc-O: An Ontology of Dispositions and their Interrelations within Systems (2025).
+Link: http://purl.org/disc-o/paper"""@en ;
+                    rdfs:label "JointManifestation"@en .
 
 
-:LoneDisposition rdfs:label "LoneDisposition"@en .
+:LoneDisposition rdfs:comment """A disposition that does not require a partner disposition to be manifested. It can be triggered and realized independently by its bearer.
+
+Example:  the radioactive decay disposition of an atom; learning capability of a person.
+Reference: R. F. Calhau, J. P. A. Almeida, G. Guizzardi; Disc-O: An Ontology of Dispositions and their Interrelations within Systems (2025).
+Link: http://purl.org/disc-o/paper"""@en ;
+                 rdfs:label "LoneDisposition"@en .
 
 
-:LoneManifestation rdfs:label "LoneManifestation"@en .
+:LoneManifestation rdfs:comment """The manifestation of a lone disposition, occurring without the need for a joint action with a partner disposition.
+
+Example: the radioactive decay of an atom; learning action of a person.
+Reference: R. F. Calhau, J. P. A. Almeida, G. Guizzardi; Disc-O: An Ontology of Dispositions and their Interrelations within Systems (2025).
+Link: http://purl.org/disc-o/paper"""@en ;
+                   rdfs:label "LoneManifestation"@en .
 
 
-:ManifestationContext rdfs:label "ManifestationContext"@en .
+:ManifestationContext rdfs:comment """The specific situation or set of conditions that triggers the manifestation of a disposition.
+
+Example: Dropping a fragile porcelain vase  onto a concrete floor, creating the condition to manifest the breaking disposition of the porcelain.
+Reference: R. F. Calhau, J. P. A. Almeida, G. Guizzardi; Disc-O: An Ontology of Dispositions and their Interrelations within Systems (2025).
+Link: http://purl.org/disc-o/paper"""@en ;
+                      rdfs:label "ManifestationContext"@en .
 
 
 :ManifestationPartnerDisposition rdfs:comment """It is a role played by a reciprocal disposition when it has a reciprocal relationship with some other. For example, the disposition d1 of magnet m1 is reciprocal, and the disposition d2 of magnetic object m2 is also reciprocal. When m1 and m2 are close together, a reciprocal relationship is established between the dispositions d1 and d2 of m1 and m2. In this case, d1 and d2 become partners in manifestation.
@@ -1083,28 +1154,72 @@ http://purl.org/disc-o/paper""" ;
                                  rdfs:label "ManifestationDispositionPartner"@en .
 
 
-:ObjectQuality rdfs:label "ObjectQuality"@en .
+:ObjectQuality rdfs:comment """A categorical property of an object that serves as the base for a disposition.
+
+Example: The crystalline structure of glass which serves as the base for its fragility.
+Reference: R. F. Calhau, J. P. A. Almeida, G. Guizzardi; Disc-O: An Ontology of Dispositions and their Interrelations within Systems (2025).
+Link: http://purl.org/disc-o/paper"""@en ;
+               rdfs:label "ObjectQuality"@en .
 
 
-:ObjectType rdfs:label "ObjectType"@en .
+:ObjectType rdfs:comment """An endurant type that classifies objects capable of bearing dispositions.
+
+Example: The type 'Electric Car' which classifies objects bearing the disposition to 'recharge'.
+Reference: R. F. Calhau, J. P. A. Almeida, G. Guizzardi; Disc-O: An Ontology of Dispositions and their Interrelations within Systems (2025).
+Link: http://purl.org/disc-o/paper"""@en ;
+            rdfs:label "ObjectType"@en .
 
 
-:ObjectTypeByLevel rdfs:label "ObjectTypebyLevel"@en .
+:ObjectTypeByLevel rdfs:comment """A classification of object types based on their organizational level within a system's hierarchy (e.g., individual components, subsystems, or the entire system). This classification is crucial for mapping how dispositions at lower levels relate to those at higher levels.
+
+Example: Distinguishing between the type 'Internal Sensor' (component level) and 'Autonomous Vehicle' (system level).
+Reference: R. F. Calhau, J. P. A. Almeida, G. Guizzardi; Disc-O: An Ontology of Dispositions and their Interrelations within Systems (2025).
+Link: http://purl.org/disc-o/paper"""@en ;
+                   rdfs:label "ObjectTypebyLevel"@en .
 
 
-:ParticularDisposition rdfs:label "ParticularDisposition"@en .
+:ParticularDisposition rdfs:comment """An individual instance of a disposition inhering in a specific object at a given time.
+
+Example: The specific ability of Pelé to score a goal.
+Reference: R. F. Calhau, J. P. A. Almeida, G. Guizzardi; Disc-O: An Ontology of Dispositions and their Interrelations within Systems (2025).
+Link: http://purl.org/disc-o/paper"""@en ;
+                       rdfs:label "ParticularDisposition"@en .
 
 
-:ParticularDispositionManifestation rdfs:label "ParticularDispositionManifestation"@en .
+:ParticularDispositionManifestation rdfs:comment """An individual event representing the realization of a particular disposition.
+
+Example: A specific instance of a glass breaking into pieces at 10:00 AM today.
+Reference: R. F. Calhau, J. P. A. Almeida, G. Guizzardi; Disc-O: An Ontology of Dispositions and their Interrelations within Systems (2025).
+Link: http://purl.org/disc-o/paper"""@en ;
+                                    rdfs:label "ParticularDispositionManifestation"@en .
 
 
-:ReciprocalDisposition rdfs:label "ReciprocalDisposition"@en .
+:ReciprocalDisposition rdfs:comment """Dispositions that require a partner disposition to be manifested in a joint event. They are mutually dependent for their activation
+Example: The disposition of a magnet to attract and the disposition of a metallic object to be attracted
+
+More information:
+
+R. F. Calhau, J. P. A. Almeida, G. Guizzardi; Disc-O: An Ontology of Dispositions and their Interrelations within Systems (2025)
+Available in:
+
+http://purl.org/disc-o/paper"""@en ;
+                       rdfs:label "ReciprocalDisposition"@en .
 
 
-:ResultantDisposition rdfs:label "ResultantDisposition"@en .
+:ResultantDisposition rdfs:comment """A system-wide disposition that is a mere sum of the dispositions of its parts, without novelty.
+
+Example: The ability to play music from the car is a capability resulting from the ability to play music from the car's sound system..
+Reference: R. F. Calhau, J. P. A. Almeida, G. Guizzardi; Disc-O: An Ontology of Dispositions and their Interrelations within Systems (2025).
+Link: http://purl.org/disc-o/paper"""@en ;
+                      rdfs:label "ResultantDisposition"@en .
 
 
-:SimpleDisposition rdfs:label "SimpleDisposition"@en .
+:SimpleDisposition rdfs:comment """A disposition that is not composed of other dispositions. It represents a basic capability of an object.
+
+Example: the disposition of a magnet to attract.
+Reference: R. F. Calhau, J. P. A. Almeida, G. Guizzardi; Disc-O: An Ontology of Dispositions and their Interrelations within Systems (2025).
+Link: http://purl.org/disc-o/paper"""@en ;
+                   rdfs:label "SimpleDisposition"@en .
 
 
 :SubtractiveDisposition rdfs:comment """Subtractive dispositions are those whose outcomes cancel, annul, or subtract each other. For example, in this case, suppose a heater h and an air conditioner a, with respective heating and cooling dispositions, are installed in the same environment. In this situation, when h and a are turned on at the same time, their dispositions subtract the effect of each other, and as a result, they are dispositions with subtractive effects.
