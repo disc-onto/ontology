@@ -114,8 +114,8 @@ rdf:type rdf:type owl:AnnotationProperty .
 
 ###  http://purl.org/disc-o#arisesFrom
 :arisesFrom rdf:type owl:ObjectProperty ;
-            rdfs:domain :Disposition ;
-            rdfs:range :ParticularDisposition .
+            rdfs:domain gufo:Aspect ;
+            rdfs:range gufo:Aspect .
 
 
 ###  http://purl.org/disc-o#bonding
@@ -210,8 +210,8 @@ rdf:type rdf:type owl:AnnotationProperty .
 ###  http://purl.org/disc-o#emergesFrom
 :emergesFrom rdf:type owl:ObjectProperty ;
              rdfs:subPropertyOf :arisesFrom ;
-             rdfs:domain :EmergentDisposition ;
-             rdfs:range :ParticularDisposition ;
+             rdfs:domain gufo:Aspect ;
+             rdfs:range gufo:Aspect ;
              rdfs:label "emergesFrom"@en .
 
 
@@ -239,8 +239,8 @@ rdf:type rdf:type owl:AnnotationProperty .
 
 ###  http://purl.org/disc-o#interaction_1
 :interaction_1 rdf:type owl:ObjectProperty ;
-               rdfs:domain :InteractiveObjectRole ;
-               rdfs:range :InteractiveObjectRole ;
+               rdfs:domain :InteractiveObjectType ;
+               rdfs:range :InteractiveObjectType ;
                rdfs:label "interactionInteractiveObjective"@en .
 
 
@@ -329,8 +329,8 @@ rdf:type rdf:type owl:AnnotationProperty .
 ###  http://purl.org/disc-o#resultsFrom
 :resultsFrom rdf:type owl:ObjectProperty ;
              rdfs:subPropertyOf :arisesFrom ;
-             rdfs:domain :ResultantDisposition ;
-             rdfs:range :ParticularDisposition ;
+             rdfs:domain gufo:Aspect ;
+             rdfs:range gufo:Aspect ;
              rdfs:label "resultsFrom"@en .
 
 
@@ -524,10 +524,15 @@ rdf:type rdf:type owl:AnnotationProperty .
                                    ] .
 
 
-###  http://purl.org/disc-o#InteractiveObjectRole
-:InteractiveObjectRole rdf:type owl:Class ;
-                       rdfs:subClassOf :ObjectType ,
-                                       gufo:RoleMixin .
+###  http://purl.org/disc-o#InteractiveObjectType
+:InteractiveObjectType rdf:type owl:Class ;
+                       rdfs:subClassOf :ObjectType ;
+                       rdfs:comment """A specialization of object type concerning objects that potentially can participate in a interaction, mediated by a relator, bearing specific interactive dispositions.
+
+Example: A 'student' object who can play a role in a classroom interaction, bearing the disposition to 'learn'.
+Reference: R. F. Calhau, J. P. A. Almeida, G. Guizzardi; Disc-O: An Ontology of Dispositions and their Interrelations within Systems (2025).
+Link: http://purl.org/disc-o/paper"""@en ;
+                       rdfs:label "InteractiveObjectType"@en .
 
 
 ###  http://purl.org/disc-o#InteractiveRelator
@@ -783,12 +788,7 @@ gufo:Participation rdfs:subClassOf [ rdf:type owl:Restriction ;
 
 ###  http://purl.org/disc-o#InteractiveObject
 :InteractiveObject rdf:type owl:NamedIndividual ,
-                            :InteractiveObjectRole ,
-                            gufo:RoleMixin .
-
-
-###  http://purl.org/disc-o#InteractiveObjectRole
-:InteractiveObjectRole rdf:type owl:NamedIndividual .
+                            :InteractiveObjectType .
 
 
 ###  http://purl.org/disc-o#InteractiveRelator
@@ -1075,14 +1075,6 @@ Example: a team member collaborating with another, an user making coffee with a 
 Reference: R. F. Calhau, J. P. A. Almeida, G. Guizzardi; Disc-O: An Ontology of Dispositions and their Interrelations within Systems (2025).
 Link: http://purl.org/disc-o/paper"""@en ;
                    rdfs:label "InteractiveObject"@en .
-
-
-:InteractiveObjectRole rdfs:comment """A role played by an object type when it participates in an interaction mediated by a relator, bearing specific interactive dispositions.
-
-Example: A 'student' object playing a role in a classroom interaction, bearing the disposition to 'learn'.
-Reference: R. F. Calhau, J. P. A. Almeida, G. Guizzardi; Disc-O: An Ontology of Dispositions and their Interrelations within Systems (2025).
-Link: http://purl.org/disc-o/paper"""@en ;
-                       rdfs:label "InteractiveObjectRole"@en .
 
 
 :InteractiveRelator rdfs:comment """A relator that mediates the interaction between two or more interactive objects, grounding the horizontal relationships between their dispositions.
